@@ -1,98 +1,81 @@
-import { Image } from 'expo-image';
-import { Platform, StyleSheet } from 'react-native';
+import ProgressBar from "@/components/progressBar";
+import { Ionicons } from "@expo/vector-icons";
+import { Tabs } from "expo-router";
+import { FlatList, Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
+import { data } from "../../assets/data/list.js";
+import robo from "../../assets/images/robo_final.png";
 
-import { HelloWave } from '@/components/hello-wave';
-import ParallaxScrollView from '@/components/parallax-scroll-view';
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
-import { Link } from 'expo-router';
-
-export default function HomeScreen() {
+export default function Index() {
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: 'cmd + d',
-              android: 'cmd + m',
-              web: 'F12',
-            })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <Link href="/modal">
-          <Link.Trigger>
-            <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-          </Link.Trigger>
-          <Link.Preview />
-          <Link.Menu>
-            <Link.MenuAction title="Action" icon="cube" onPress={() => alert('Action pressed')} />
-            <Link.MenuAction
-              title="Share"
-              icon="square.and.arrow.up"
-              onPress={() => alert('Share pressed')}
-            />
-            <Link.Menu title="More" icon="ellipsis">
-              <Link.MenuAction
-                title="Delete"
-                icon="trash"
-                destructive
-                onPress={() => alert('Delete pressed')}
-              />
-            </Link.Menu>
-          </Link.Menu>
-        </Link>
+    // need to add pulsing
+    <ScrollView className="bg-slate-900 h-full w-full px-4 ">
+      <Tabs.Screen
+        options={{
+          title: "LumaLife",
+          headerRight: () => (
+            <TouchableOpacity>
+              <Ionicons name="settings-outline" size={20} color={"white"} />
+            </TouchableOpacity>
+          ),
+        }}
+      />
 
-        <ThemedText>
-          {`Tap the Explore tab to learn more about what's included in this starter app.`}
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          {`When you're ready, run `}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+      <View className="flex justify-center items-center flex-col mt-6">
+        <View className="flex justify-center items-center flex-col">
+          <View>
+            <Text className="text-white text-3xl font-bold tracking-wider">
+              Your Lifestyle Score
+            </Text>
+          </View>
+          <View>
+            <Text className="text-gray-600 text-lg font-semibold">78/100</Text>
+          </View>
+        </View>
+        <View>
+          <View className="z-0 bg-blue-900/10 rounded-full p-6 mt-8 ">
+            <View className="bg-black rounded-full h-fit w-fit p-0  z-5">
+              <Image source={robo} className="h-[250px] w-[250px]" />
+            </View>
+          </View>
+        </View>
+      </View>
+
+      <View>
+        <View>
+          <Text className="text-white text-3xl font-bold mt-6">
+            {" "}
+            Daily Progress
+          </Text>
+        </View>
+        <View className="mb-10">
+          <FlatList
+          data={data}
+          scrollEnabled={false}
+          renderItem={({item}) =><View className="flex justify-between items-center flex-row mt-4 bg-neutral-900/70 rounded-xl px-3 py-4">
+          <View className="flex justify-between items-center flex-row gap-4">
+            <View className="p-2 bg-blue-950/50 rounded-xl">
+              <Ionicons name={item.icon} size={30} color={"blue"} />
+            </View>
+            <View>
+              <Text className="text-white text-xl font-semibold tracking-wider">
+                {item.title}
+              </Text>
+              <Text className="text-gray-600 text-lg font-semibold">
+                {item.Value}
+              </Text>
+            </View>
+          </View>
+
+          <View className="absolute right-6">
+            <ProgressBar progress={item.score} />
+          </View>
+        </View>}>
+
+          </FlatList>
+        </View>
+
+        
+      </View>
+    </ScrollView>
   );
 }
-
-const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
-  },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
-  },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
-  },
-});

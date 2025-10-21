@@ -1,35 +1,75 @@
-import { Tabs } from 'expo-router';
-import React from 'react';
+import { Ionicons } from "@expo/vector-icons";
+import { Tabs } from "expo-router";
+import { TouchableOpacity } from "react-native";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 
-import { HapticTab } from '@/components/haptic-tab';
-import { IconSymbol } from '@/components/ui/icon-symbol';
-import { Colors } from '@/constants/theme';
-import { useColorScheme } from '@/hooks/use-color-scheme';
-
-export default function TabLayout() {
-  const colorScheme = useColorScheme();
-
+const tabsLayout = () => {
   return (
-    <Tabs
-      screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        headerShown: false,
-        tabBarButton: HapticTab,
-      }}>
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: 'Home',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
+    <SafeAreaProvider>
+      <Tabs
+        screenOptions={{
+          headerStyle: { backgroundColor: "#0f172a" },
+          headerShadowVisible: false,
+          headerTransparent: false,
+          headerTitleAlign: "center",
+          headerTitleStyle: { color: "white", fontWeight: "bold" },
+          tabBarStyle: {
+            backgroundColor: "#0f172a",
+            elevation: 0,
+            shadowOpacity: 0,
+            borderTopWidth: 0,
+          },
+          headerRight: () => (
+              <TouchableOpacity>
+                <Ionicons name="settings-outline" size={20} color={"white"} />
+              </TouchableOpacity>
+            ),
         }}
-      />
-      <Tabs.Screen
-        name="explore"
-        options={{
-          title: 'Explore',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
-        }}
-      />
-    </Tabs>
+      >
+        <Tabs.Screen
+          name="index"
+          options={{
+            tabBarLabel: "Home",
+            tabBarIcon: ({ color, size }) => (
+              <Ionicons name="home" size={size} color={color} />
+            ),
+            title: "LumaLife",
+          
+          }}
+        />
+        <Tabs.Screen
+          name="meal"
+          options={{
+            tabBarLabel: "Log Meals",
+            tabBarIcon: ({ color, size }) => (
+              <Ionicons name="add" size={size} color={color} />
+            ),
+            title: "Log Meals",
+          }}
+        />
+        <Tabs.Screen
+          name="insights"
+          options={{
+            tabBarLabel: "Insights",
+            tabBarIcon: ({ color, size }) => (
+              <Ionicons name="bulb" size={size} color={color} />
+            ),
+            title: "Insights",
+          }}
+        />
+        <Tabs.Screen
+          name="projections"
+          options={{
+            tabBarLabel: "Projections",
+            tabBarIcon: ({ color, size }) => (
+              <Ionicons name="trending-up" size={size} color={color} />
+            ),
+            title: "Projections",
+          }}
+        />
+      </Tabs>
+    </SafeAreaProvider>
   );
-}
+};
+
+export default tabsLayout;
