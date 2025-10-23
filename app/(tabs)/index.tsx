@@ -32,7 +32,7 @@ export default function Index() {
           </View>
         </View>
         <View>
-          <View className="z-0 bg-blue-900/10 rounded-full p-6 mt-8 ">
+          <View className="z-0 bg-blue-900/10 rounded-full p-6 mt-8">
             <View className="bg-black rounded-full h-fit w-fit p-0  z-5">
               <Image source={robo} className="h-[250px] w-[250px]" />
             </View>

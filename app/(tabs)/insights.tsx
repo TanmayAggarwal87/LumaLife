@@ -18,8 +18,8 @@ const insights = () => {
 
       <View className="w-full mt-4">
         
-        <View className="mt-4 flex w-full justify-center items-start px-2">
-          <Text className="text-2xl text-white font-bold mb-4">Activity</Text>
+        <View className="mt-4 flex w-full justify-center items-start px-2 gap-4">
+          <Text className="text-2xl text-white font-bold mb-2">Activity</Text>
           {/* Steps */}
           <View className="mt-8">
             <Text className="text-xl text-gray-400 font-semibold">

@@ -19,6 +19,7 @@ const tabsLayout = () => {
             shadowOpacity: 0,
             borderTopWidth: 0,
           },
+
           headerRight: () => (
               <TouchableOpacity>
                 <Ionicons name="settings-outline" size={20} color={"white"} />
