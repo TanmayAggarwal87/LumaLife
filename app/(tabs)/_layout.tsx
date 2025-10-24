@@ -1,9 +1,10 @@
 import { Ionicons } from "@expo/vector-icons";
-import { Tabs } from "expo-router";
+import { Tabs, useRouter } from "expo-router";
 import { TouchableOpacity } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
 const tabsLayout = () => {
+  const router = useRouter()
   return (
     <SafeAreaProvider>
       <Tabs
@@ -21,10 +22,10 @@ const tabsLayout = () => {
           },
 
           headerRight: () => (
-              <TouchableOpacity>
-                <Ionicons name="settings-outline" size={20} color={"white"} />
-              </TouchableOpacity>
-            ),
+            <TouchableOpacity>
+              <Ionicons name="settings-outline" size={20} color={"white"} />
+            </TouchableOpacity>
+          ),
         }}
       >
         <Tabs.Screen
@@ -35,16 +36,20 @@ const tabsLayout = () => {
               <Ionicons name="home" size={size} color={color} />
             ),
             title: "LumaLife",
-          
           }}
         />
         <Tabs.Screen
-          name="meal"
+          name="meals"
           options={{
             tabBarLabel: "Log Meals",
             tabBarIcon: ({ color, size }) => (
               <Ionicons name="add" size={size} color={color} />
             ),
+            headerLeft: () => (
+            <TouchableOpacity onPress={()=>router.replace("/(tabs)/meals")}>
+              <Ionicons name="arrow-back" size={20} color={"white"} />
+            </TouchableOpacity>
+          ),
             title: "Log Meals",
           }}
         />
@@ -68,6 +73,7 @@ const tabsLayout = () => {
             title: "Projections",
           }}
         />
+        
       </Tabs>
     </SafeAreaProvider>
   );

@@ -1,7 +1,7 @@
+import { Ionicons } from '@expo/vector-icons'
 import React from 'react'
 import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native'
 import robo from "../../assets/images/insights.png"
-import { Ionicons } from '@expo/vector-icons'
 
 const projections = () => {
   return (
@@ -13,7 +13,7 @@ const projections = () => {
 
       <View className='items-center'>
         <View className='bg-[#0A0A0A] w-[340px] h-[340px] rounded-full overflow-hidden'>
-          <Image source={robo} className='w-full h-full rounded-full' resizeMode='cover' />
+          <Image source={robo} className='w-full h-full rounded-full' resizeMode="contain" />
         </View>
       </View>
 

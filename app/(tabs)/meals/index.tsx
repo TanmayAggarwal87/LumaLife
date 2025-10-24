@@ -1,8 +1,10 @@
+import { useRouter } from 'expo-router'
 import React from 'react'
-import { Button, FlatList, Image, ScrollView, Text, TouchableOpacity, View } from 'react-native'
-import {foodList} from "../../assets/data/food.js"
+import { FlatList, Image, Text, TouchableOpacity, View } from 'react-native'
+import { foodList } from "../../../assets/data/food.js"
 
 const meal = () => {
+  const router = useRouter()
   return (
     <View>
       
@@ -39,7 +41,7 @@ const meal = () => {
           <Text className="text-white font-semibold text-lg">Scan Food</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity className="bg-blue-800 px-8 py-3 rounded-full">
+        <TouchableOpacity className="bg-blue-800 px-8 py-3 rounded-full" onPress={()=>router.push("/meals/form")}>
           <Text className="text-white font-semibold text-lg">Log Meal</Text>
         </TouchableOpacity>
       </View>

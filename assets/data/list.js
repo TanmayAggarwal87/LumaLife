@@ -9,7 +9,7 @@ export const data =[
     "title":"Nutrition",
     "score":65,
     "Value":"1800 Kcal",
-    "icon" : "fast-food-outline"
+    "icon" : "restaurant-outline"
     },
     {"id" :3,
     "title":"Activity",
