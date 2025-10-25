@@ -1,11 +1,19 @@
 import ProgressBar from "@/components/progressBar";
 import { Ionicons } from "@expo/vector-icons";
-import { Tabs } from "expo-router";
-import { FlatList, Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
+import { Tabs, useRouter } from "expo-router";
+import {
+  FlatList,
+  Image,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { data } from "../../assets/data/list.js";
 import robo from "../../assets/images/robo_final.png";
 
 export default function Index() {
+  const router = useRouter()
   return (
     // need to add pulsing
     <ScrollView className="bg-slate-900 h-full w-full px-4 ">
@@ -49,32 +57,31 @@ export default function Index() {
         </View>
         <View className="mb-10">
           <FlatList
-          data={data}
-          scrollEnabled={false}
-          renderItem={({item}) =><View className="flex justify-between items-center flex-row mt-4 bg-neutral-900/70 rounded-xl px-3 py-4">
-          <View className="flex justify-between items-center flex-row gap-4">
-            <View className="p-2 bg-blue-950/50 rounded-xl">
-              <Ionicons name={item.icon} size={30} color={"blue"} />
-            </View>
-            <View>
-              <Text className="text-white text-xl font-semibold tracking-wider">
-                {item.title}
-              </Text>
-              <Text className="text-gray-600 text-lg font-semibold">
-                {item.Value}
-              </Text>
-            </View>
-          </View>
+            data={data}
+            scrollEnabled={false}
+            renderItem={({ item }) => (
+              <TouchableOpacity className="flex justify-between items-center flex-row mt-4 bg-neutral-900/70 rounded-xl px-3 py-4" onPress={()=>router.navigate(`/(pages)/${item.title.toLocaleLowerCase()}`)}>
+                <View className="flex justify-between items-center flex-row gap-4">
+                  <View className="p-2 bg-blue-950/50 rounded-xl">
+                    <Ionicons name={item.icon} size={30} color={"blue"} />
+                  </View>
+                  <View>
+                    <Text className="text-white text-xl font-semibold tracking-wider">
+                      {item.title}
+                    </Text>
+                    <Text className="text-gray-600 text-lg font-semibold">
+                      {item.Value}
+                    </Text>
+                  </View>
+                </View>
 
-          <View className="absolute right-6">
-            <ProgressBar progress={item.score} />
-          </View>
-        </View>}>
-
-          </FlatList>
+                <View className="absolute right-6">
+                  <ProgressBar progress={item.score} />
+                </View>
+              </TouchableOpacity>
+            )}
+          ></FlatList>
         </View>
-
-        
       </View>
     </ScrollView>
   );
