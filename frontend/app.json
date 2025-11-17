@@ -5,7 +5,7 @@
     "version": "1.0.0",
     "backgroundColor": "#0f172a",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/images/icons.png",
     "scheme": "lumalife",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
@@ -13,11 +13,12 @@
       "supportsTablet": true
     },
     "android": {
+      "splash": {
+        "backgroundColor": "#0f172a"
+      },
       "adaptiveIcon": {
-        "backgroundColor": "#E6F4FE",
-        "foregroundImage": "./assets/images/android-icon-foreground.png",
-        "backgroundImage": "./assets/images/android-icon-background.png",
-        "monochromeImage": "./assets/images/android-icon-monochrome.png"
+        "backgroundColor": "#0f172a",
+        "foregroundImage": "./assets/images/icons.png"
       },
       "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false,
@@ -32,15 +33,15 @@
       [
         "expo-splash-screen",
         {
-          "image": "./assets/images/splash-icon.png",
-          "imageWidth": 200,
+          "image": "./assets/images/splashs.png",
           "resizeMode": "contain",
           "backgroundColor": "#0f172a",
           "dark": {
             "backgroundColor": "#0f172a"
           }
         }
-      ]
+      ],
+      "expo-web-browser"
     ],
     "experiments": {
       "typedRoutes": true,
