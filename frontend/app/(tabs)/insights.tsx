@@ -31,11 +31,11 @@ const insights = () => {
             </Text>
 
             <View className="flex-row justify-between mt-6 items-end h-20 w-full">
-              <View className="bg-blue-800/30 rounded-t-full w-10 h-[10%]" />
-              <View className="bg-blue-800/30 rounded-t-full w-10 h-[60%]" />
-              <View className="bg-blue-800/30 rounded-t-full w-10 h-[80%]" />
-              <View className="bg-blue-800/30 rounded-t-full w-10 h-[60%]" />
-              <View className="bg-blue-800/30 rounded-t-full w-10 h-[60%]" />
+              <View className="bg-blue-800/10 rounded-t-full w-10 h-[10%]" />
+              <View className="bg-blue-800/10 rounded-t-full w-10 h-[60%]" />
+              <View className="bg-blue-800/10 rounded-t-full w-10 h-[80%]" />
+              <View className="bg-blue-800/10 rounded-t-full w-10 h-[60%]" />
+              <View className="bg-blue-800/10 rounded-t-full w-10 h-[60%]" />
             </View>
 
             <View className="flex-row justify-between mt-2 w-full">
@@ -58,11 +58,11 @@ const insights = () => {
             </Text>
 
             <View className="flex-row justify-between mt-6 items-end h-20 w-full">
-              <View className="bg-blue-800/30 rounded-t-full w-10 h-[10%]" />
-              <View className="bg-blue-800/30 rounded-t-full w-10 h-[60%]" />
-              <View className="bg-blue-800/30 rounded-t-full w-10 h-[80%]" />
-              <View className="bg-blue-800/30 rounded-t-full w-10 h-[60%]" />
-              <View className="bg-blue-800/30 rounded-t-full w-10 h-[60%]" />
+              <View className="bg-blue-800/10 rounded-t-full w-10 h-[10%]" />
+              <View className="bg-blue-800/10 rounded-t-full w-10 h-[60%]" />
+              <View className="bg-blue-800/10 rounded-t-full w-10 h-[80%]" />
+              <View className="bg-blue-800/10 rounded-t-full w-10 h-[60%]" />
+              <View className="bg-blue-800/10 rounded-t-full w-10 h-[60%]" />
             </View>
 
             <View className="flex-row justify-between mt-2 w-full">
@@ -85,11 +85,11 @@ const insights = () => {
             </Text>
 
             <View className="flex-row justify-between mt-6 items-end h-20 w-full">
-              <View className="bg-blue-800/30 rounded-t-full w-10 h-[10%]" />
-              <View className="bg-blue-800/30 rounded-t-full w-10 h-[60%]" />
-              <View className="bg-blue-800/30 rounded-t-full w-10 h-[80%]" />
-              <View className="bg-blue-800/30 rounded-t-full w-10 h-[60%]" />
-              <View className="bg-blue-800/30 rounded-t-full w-10 h-[60%]" />
+              <View className="bg-blue-800/10 rounded-t-full w-10 h-[10%]" />
+              <View className="bg-blue-800/10 rounded-t-full w-10 h-[60%]" />
+              <View className="bg-blue-800/10 rounded-t-full w-10 h-[80%]" />
+              <View className="bg-blue-800/10 rounded-t-full w-10 h-[60%]" />
+              <View className="bg-blue-800/10 rounded-t-full w-10 h-[60%]" />
             </View>
 
             <View className="flex-row justify-between mt-2 w-full">

@@ -1,3 +1,4 @@
+import SegmentedControl, { SegmentOption } from "@/components/topBar";
 import { Ionicons } from "@expo/vector-icons";
 import clsx from "clsx";
 import { LinearGradient } from "expo-linear-gradient";
@@ -5,7 +6,7 @@ import React, { useState } from "react";
 import { ScrollView, Text, TouchableOpacity, View } from "react-native";
 
 export default function sleep() {
-  const [selectedTab, setSelectedTab] = useState("Daily");
+  const [selectedTab, setSelectedTab] = useState<SegmentOption>("Daily");
 
   // Hardcoded data for different tabs
   const data = {
@@ -51,31 +52,12 @@ export default function sleep() {
     <View className="h-full w-full  bg-slate-900 ">
       <ScrollView className="h-full w-full px-5 pt-2">
         {/* Tab Navigation */}
-        <View className="flex flex-row justify-evenly items-center bg-slate-800 rounded-full p-1 mb-6">
-          {["Daily", "Weekly", "Monthly"].map((tab) => (
-            <TouchableOpacity
-              key={tab}
-              onPress={() => setSelectedTab(tab)}
-              className="rounded-full"
-            >
-              <View
-                className={clsx(
-                  "py-2 rounded-full px-6",
-                  selectedTab === tab && "bg-blue-500 rounded-full"
-                )}
-              >
-                <Text
-                  className={clsx(
-                    "text-center text-md font-semibold",
-                    selectedTab === tab ? "text-white" : "text-gray-400"
-                  )}
-                >
-                  {tab}
-                </Text>
-              </View>
-            </TouchableOpacity>
-          ))}
-        </View>
+        <View className="px-2 pb-4">
+                  <SegmentedControl
+                  selected={selectedTab}
+                  onChange={setSelectedTab}
+                />
+                </View>
 
         {/* Sleep Section */}
         <View className="flex justify-center items-center">

@@ -34,7 +34,7 @@ const form = () => {
             setForm(prev => ({ ...prev, type: meal }));
             handleNext();
 }}
-            className="bg-blue-800/30 w-full h-[115px] px-6 py-3 m-2 rounded-3xl flex justify-center items-center "
+            className="bg-blue-800/10 w-full h-[115px] px-6 py-3 m-2 rounded-3xl flex justify-center items-center "
           >
             <Text className="text-white text-2xl font-semibold tracking-wider">{meal}</Text>
           </TouchableOpacity>   

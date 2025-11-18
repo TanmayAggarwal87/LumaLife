@@ -18,7 +18,7 @@ const meal = () => {
         <FlatList
         data={foodList}
         renderItem={({item})=>(
-          <View className='bg-blue-800/30 rounded-xl px-3 py-6 flex justify-between items-start flex-row mt-4'>
+          <View className='bg-blue-800/10 rounded-xl px-3 py-6 flex justify-between items-start flex-row mt-4'>
           <View className='flex gap-1'>
             <Text className='text-lg text-gray-400 font-semibold tracking-wider'>{item.type}</Text>
             <Text className='text-xl text-white font-bold tracking-wider'>{item.name}</Text>

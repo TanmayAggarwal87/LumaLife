@@ -1,24 +1,26 @@
+import SegmentedControl, {  SegmentOption } from "@/components/topBar";
 import { Ionicons } from "@expo/vector-icons";
-import clsx from "clsx";
 import { LinearGradient } from "expo-linear-gradient";
 import React, { useState } from "react";
 import { ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { PieChart } from "react-native-gifted-charts";
 
+
+
 export default function nutrition() {
-  const [selectedTab, setSelectedTab] = useState("Weekly");
+  const [selectedTab, setSelectedTab] = useState<SegmentOption>("Weekly");
 
   // Hardcoded data for different tabs
-  const data = {
+  const data  = {
     Daily: { calories: 450, goal: 2200, protein: 35, proteinGoal: 180 },
     Weekly: { calories: 1890, goal: 2200, protein: 145, proteinGoal: 180 },
     Monthly: { calories: 7850, goal: 2200, protein: 620, proteinGoal: 180 },
   };
 
-  const currentData = data[selectedTab];
-  const caloriePercentage = (currentData.calories / currentData.goal) * 100;
+  const currentData =  data[selectedTab];
+  const caloriePercentage = (Number(currentData.calories) / Number(currentData.goal)) * 100;
   const proteinPercentage =
-    (currentData.protein / currentData.proteinGoal) * 100;
+    (Number(currentData.protein) / Number(currentData.proteinGoal)) * 100;
 
   const pieData = [
     {
@@ -34,33 +36,14 @@ export default function nutrition() {
 
   return (
     <View className="h-full w-full  bg-slate-900">
-      <ScrollView className="h-full w-full px-5 pt-2">
+      <ScrollView className="h-full w-full px-5 mb-5 pt-2">
         {/* Tab Navigation */}
-        <View className="flex flex-row justify-evenly items-center bg-slate-800 rounded-full p-1 mb-6">
-          {["Daily", "Weekly", "Monthly"].map((tab) => (
-            <TouchableOpacity
-              key={tab}
-              onPress={() => setSelectedTab(tab)}
-              className="rounded-full"
-            >
-              <View
-                className={clsx(
-                  "py-2 rounded-full px-6",
-                  selectedTab === tab && "bg-blue-500 rounded-full"
-                )}
-              >
-                <Text
-                  className={clsx(
-                    "text-center text-md font-semibold",
-                    selectedTab === tab ? "text-white" : "text-gray-400"
-                  )}
-                >
-                  {tab}
-                </Text>
-              </View>
-            </TouchableOpacity>
-          ))}
-        </View>
+        <View className="px-2 pb-4">
+          <SegmentedControl
+          selected={selectedTab}
+          onChange={setSelectedTab}
+        />
+    </View>
 
         {/* Calories Section */}
         <View className="items-center mb-2">
@@ -73,10 +56,13 @@ export default function nutrition() {
         {/* Circular Progress Chart */}
         <View className="items-center mb-8 relative">
           <PieChart
+            curvedEndEdges={true}
+            curvedStartEdges={true}
+            edgesRadius={9999}
             data={pieData}
             donut
             radius={100}
-            innerRadius={80}
+            innerRadius={72}
             innerCircleColor="#0f172a"
             strokeWidth={5}
             tooltipBorderRadius={9999}
@@ -95,7 +81,7 @@ export default function nutrition() {
         {/* Your Goals Section */}
         <View className="flex-row justify-between items-center mb-4">
           <Text className="text-white text-xl font-semibold">Your Goals</Text>
-          <TouchableOpacity className="flex-row items-center bg-blue-800/30 p-2 rounded-full ">
+          <TouchableOpacity className="flex-row items-center bg-blue-800/10 p-2 rounded-full ">
             <Ionicons name="create-outline" size={20} color="#3b82f6" />
             <Text className="text-blue-500 text-md ml-1">Edit Goals</Text>
           </TouchableOpacity>
