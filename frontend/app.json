@@ -22,7 +22,12 @@
       },
       "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false,
-      "package": "com.tanmayaggarwal.LumaLife"
+      "package": "com.tanmayaggarwal.LumaLife",
+      "permissions": [
+        "android.permission.INTERNET",
+        "android.permission.ACCESS_NETWORK_STATE",
+        "android.permission.health.READ_HEALTH_DATA"
+      ]
     },
     "web": {
       "output": "static",
@@ -41,11 +46,41 @@
           }
         }
       ],
-      "expo-web-browser"
+      "expo-web-browser",
+      [
+        "expo-health-connect",
+        {
+          "permissions": [
+            "steps",
+            "sleep",
+            "distance",
+            "exercise",
+            "nutrition",
+            "heart_rate"
+          ]
+        }
+      ],
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "compileSdkVersion": 35,
+            "targetSdkVersion": 35,
+            "minSdkVersion": 26
+          }
+        }
+      ]
     ],
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
-    }
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "55decf95-a8b4-4029-986b-fa40644f69a3"
+      }
+    },
+    "owner": "tanmayaggarwal"
   }
 }

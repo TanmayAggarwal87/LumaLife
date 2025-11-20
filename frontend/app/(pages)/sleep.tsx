@@ -1,39 +1,20 @@
 import SegmentedControl, { SegmentOption } from "@/components/topBar";
 import { Ionicons } from "@expo/vector-icons";
-import clsx from "clsx";
 import { LinearGradient } from "expo-linear-gradient";
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { ScrollView, Text, TouchableOpacity, View } from "react-native";
 
-export default function sleep() {
+import { useHealthData } from "@/lib/health/useHealthData";
+
+export default function Sleep() {
   const [selectedTab, setSelectedTab] = useState<SegmentOption>("Daily");
+  const { metrics, loading, error } = useHealthData();
 
-  // Hardcoded data for different tabs
-  const data = {
-    Daily: {
-      sleepScore: 82,
-      totalSleep: "7 h 35 m",
-      deepSleep: "1 h 45 m",
-      lightSleep: "4 h 10 m",
-      remSleep: "1 h 40 m",
-    },
-    Weekly: {
-      sleepScore: 78,
-      totalSleep: "52 h 15 m",
-      deepSleep: "11 h 20 m",
-      lightSleep: "30 h 45 m",
-      remSleep: "10 h 10 m",
-    },
-    Monthly: {
-      sleepScore: 80,
-      totalSleep: "215 h 30 m",
-      deepSleep: "50 h 10 m",
-      lightSleep: "125 h 40 m",
-      remSleep: "39 h 40 m",
-    },
-  };
-
-  const currentData = data[selectedTab];
+  const currentData = useMemo(
+    () =>
+      metrics.segments[selectedTab]?.sleep ?? metrics.segments.Daily.sleep,
+    [metrics.segments, selectedTab]
+  );
   const parseTime = (str: any) => {
     const [hr, min] = str.match(/\d+/g).map(Number);
     return hr * 60 + (min || 0);
@@ -53,11 +34,19 @@ export default function sleep() {
       <ScrollView className="h-full w-full px-5 pt-2">
         {/* Tab Navigation */}
         <View className="px-2 pb-4">
-                  <SegmentedControl
-                  selected={selectedTab}
-                  onChange={setSelectedTab}
-                />
+          <SegmentedControl
+            selected={selectedTab}
+            onChange={setSelectedTab}
+          />
                 </View>
+        {error ? (
+          <Text className="text-red-400 text-xs px-2">{error}</Text>
+        ) : null}
+        {loading ? (
+          <Text className="text-gray-400 text-xs px-2 mb-2">
+            Loading sleep sessions...
+          </Text>
+        ) : null}
 
         {/* Sleep Section */}
         <View className="flex justify-center items-center">

@@ -1,26 +1,26 @@
-import SegmentedControl, {  SegmentOption } from "@/components/topBar";
+import SegmentedControl, { SegmentOption } from "@/components/topBar";
 import { Ionicons } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { PieChart } from "react-native-gifted-charts";
 
+import { useHealthData } from "@/lib/health/useHealthData";
 
-
-export default function nutrition() {
+export default function Nutrition() {
   const [selectedTab, setSelectedTab] = useState<SegmentOption>("Weekly");
+  const { metrics, loading, error } = useHealthData();
 
-  // Hardcoded data for different tabs
-  const data  = {
-    Daily: { calories: 450, goal: 2200, protein: 35, proteinGoal: 180 },
-    Weekly: { calories: 1890, goal: 2200, protein: 145, proteinGoal: 180 },
-    Monthly: { calories: 7850, goal: 2200, protein: 620, proteinGoal: 180 },
-  };
+  const currentData = useMemo(() => {
+    const fallback = metrics.segments.Daily.nutrition;
+    return metrics.segments[selectedTab]?.nutrition ?? fallback;
+  }, [metrics.segments, selectedTab]);
 
-  const currentData =  data[selectedTab];
-  const caloriePercentage = (Number(currentData.calories) / Number(currentData.goal)) * 100;
+  const caloriePercentage =
+    (Number(currentData.calories || 0) / Number(currentData.goal || 1)) * 100;
   const proteinPercentage =
-    (Number(currentData.protein) / Number(currentData.proteinGoal)) * 100;
+    (Number(currentData.protein || 0) / Number(currentData.proteinGoal || 1)) *
+    100;
 
   const pieData = [
     {
@@ -39,11 +39,16 @@ export default function nutrition() {
       <ScrollView className="h-full w-full px-5 mb-5 pt-2">
         {/* Tab Navigation */}
         <View className="px-2 pb-4">
-          <SegmentedControl
-          selected={selectedTab}
-          onChange={setSelectedTab}
-        />
-    </View>
+          <SegmentedControl selected={selectedTab} onChange={setSelectedTab} />
+        </View>
+        {error ? (
+          <Text className="text-red-400 text-xs px-2">{error}</Text>
+        ) : null}
+        {loading ? (
+          <Text className="text-gray-400 text-xs px-2 mb-2">
+            Updating nutrition averages...
+          </Text>
+        ) : null}
 
         {/* Calories Section */}
         <View className="items-center mb-2">

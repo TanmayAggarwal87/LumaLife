@@ -3,35 +3,33 @@ import React from "react";
 import { ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { LineChart } from "react-native-gifted-charts";
 
-const stress = () => {
-  const stressData = [
-    { value: 30 },
-    { value: 45 },
-    { value: 60 },
-    { value: 75 },
-    { value: 85 },
-    { value: 90 },
-    { value: 80 },
-    { value: 65 },
-    { value: 50 },
-    { value: 40 },
-    { value: 35 },
-    { value: 45 },
-    { value: 70 },
-  ];
+import { useHealthData } from "@/lib/health/useHealthData";
+
+const Stress = () => {
+  const { metrics, error, loading } = useHealthData();
+  const stressData = metrics.stress;
+
   return (
     <ScrollView className="h-full w-full bg-slate-900 px-4">
       <View className="mb-12 flex gap-4">
         <View className="flex justify-center items-center flex-col gap-2">
           <Text className=" text-lg text-gray-400">Today's Stress Level</Text>
           <Text className=" text-5xl tracking-wider font-bold text-white">
-            Low
+            {stressData.level}
           </Text>
           <Text className=" text-lg text-gray-400">
-            Your Resiliance is high today good job
+            Your nervous system looks{" "}
+            {stressData.level === "High" ? "taxed" : "resilient"} today.
           </Text>
         </View>
-
+        {error ? (
+          <Text className="text-red-400 text-xs text-center">{error}</Text>
+        ) : null}
+        {loading ? (
+          <Text className="text-gray-400 text-xs text-center">
+            Pulling heart rate trends...
+          </Text>
+        ) : null}
         <View className="gap-6">
           {/* Stress Pattern Card */}
           <View className="bg-blue-800/10 rounded-2xl p-4">
@@ -44,7 +42,7 @@ const stress = () => {
 
             {/* Line Chart */}
             <LineChart
-              data={stressData}
+              data={stressData.pattern}
               height={130}
               curved
               color="#60A5FA"
@@ -81,13 +79,18 @@ const stress = () => {
                   Practice mindfulness 15 mins/day
                 </Text>
                 <Text className="text-md mt-1" style={{ color: "#60A5FA" }}>
-                  30%
+                  {Math.round(
+                    (stressData.loggedMinutes / stressData.goalMinutes || 0) *
+                      100
+                  )}
+                  %
                 </Text>
               </View>
             </View>
 
             <Text className="text-gray-400 text-sm mt-2 text-center">
-              8 of 15 mins logged today
+              {stressData.loggedMinutes} of {stressData.goalMinutes} mins logged
+              today
             </Text>
           </View>
 
@@ -131,9 +134,9 @@ const stress = () => {
                     <Text className="text-white font-semibold text-base">
                       5-Minute Meditation
                     </Text>
-                    <Text className="text-gray-400 text-sm">
-                      Guided session to calm your mind
-                    </Text>
+                  <Text className="text-gray-400 text-sm">
+                    Guided session to calm your mind
+                  </Text>
                   </View>
 
                   <View
@@ -159,9 +162,9 @@ const stress = () => {
                     <Text className="text-white font-semibold text-base">
                       Mindful Breathing
                     </Text>
-                    <Text className="text-gray-400 text-sm">
-                      Quick exercise to center yourself
-                    </Text>
+                  <Text className="text-gray-400 text-sm">
+                    Quick exercise to center yourself
+                  </Text>
                   </View>
                   <View
                   className="w-10 h-10 rounded-full items-center justify-center"
@@ -182,4 +185,4 @@ const stress = () => {
   );
 };
 
-export default stress;
+export default Stress;
