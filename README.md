@@ -6,11 +6,6 @@ LumaLife is a comprehensive mobile application designed to empower individuals w
 
 ---
 
-## Live Demo Link
-
-A live demo is not currently available for public access. For a demonstration, please contact the author.
-
----
 
 ## Problem Statement
 
